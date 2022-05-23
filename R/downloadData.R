@@ -190,7 +190,6 @@ bqr_download_extract <- function(extractJob,
   
   if(length(objectnames) > 1){
     message("Multiple files to download.")
-    filename <- paste0(as.character(1:length(objectnames),"_",filename))
   }
   
   dl <- function(f_name){
