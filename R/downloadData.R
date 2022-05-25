@@ -108,29 +108,55 @@ bqr_extract_data <- function(projectId = bqr_get_global_project(),
 
   gsUri <- paste0(cloudStorageBucket, "/", filename)
   
-  config <- list(
-    jobReference = list(
-      projectId = projectId
-      ##jobId = idempotency() ## uuid to stop duplicate exports - breaks if set.seed (#37)
-    ),
-    configuration = list(
-      extract = list(
-        sourceTable = list(
-          datasetId = datasetId,
-          projectId = projectId,
-          tableId = tableId
-        ),
-        destinationUris = list(
-          gsUri
+  if (destinationFormat=="CSV") {
+    config <- list(
+      jobReference = list(
+        projectId = projectId
+        ##jobId = idempotency() ## uuid to stop duplicate exports - breaks if set.seed (#37)
+      ),
+      configuration = list(
+        extract = list(
+          sourceTable = list(
+            datasetId = datasetId,
+            projectId = projectId,
+            tableId = tableId
           ),
-        printHeader = printHeader,
-        fieldDelimiter = fieldDelimiter,
-        destinationFormat = destinationFormat,
-        compression = compression
+          destinationUris = list(
+            gsUri
+            ),
+          printHeader = printHeader,
+          fieldDelimiter = fieldDelimiter,
+          destinationFormat = destinationFormat,
+          compression = compression
+        )
       )
     )
-  )
-  
+  }
+  else {
+  if (destinationFormat=="CSV") {
+    config <- list(
+      jobReference = list(
+        projectId = projectId
+        ##jobId = idempotency() ## uuid to stop duplicate exports - breaks if set.seed (#37)
+      ),
+      configuration = list(
+        extract = list(
+          sourceTable = list(
+            datasetId = datasetId,
+            projectId = projectId,
+            tableId = tableId
+          ),
+          destinationUris = list(
+            gsUri
+            ),
+          printHeader = printHeader,
+          destinationFormat = destinationFormat,
+          compression = compression
+        )
+      )
+    )    
+    
+  }  
   config <- rmNullObs(config)
   
   req <- job(path_arguments = list(projects = projectId),
