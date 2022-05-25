@@ -131,9 +131,7 @@ bqr_extract_data <- function(projectId = bqr_get_global_project(),
         )
       )
     )
-  }
-  else {
-  if (destinationFormat=="CSV") {
+  } else {
     config <- list(
       jobReference = list(
         projectId = projectId
@@ -155,7 +153,6 @@ bqr_extract_data <- function(projectId = bqr_get_global_project(),
         )
       )
     )    
-    
   }  
   config <- rmNullObs(config)
   
