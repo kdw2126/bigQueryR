@@ -77,8 +77,7 @@ bqr_extract_data <- function(projectId = bqr_get_global_project(),
                              compression = c("NONE","GZIP"),
                              destinationFormat = c("CSV",
                                                    "NEWLINE_DELIMITED_JSON", 
-                                                   "AVRO",
-                                                   "PARQUET"),
+                                                   "AVRO"),
                              fieldDelimiter = ",",
                              printHeader = TRUE){
   
